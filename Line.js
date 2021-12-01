@@ -1,3 +1,5 @@
+import Point from "./Point.js";
+
 export default class Line{
     constructor(p1,p2){
         this.p1 = p1;
@@ -10,6 +12,12 @@ export default class Line{
 
     intersect(line){
         return this.collision(this.p1,line.p1,line.p2) != this.collision(this.p2,line.p1,line.p2) && this.collision(this.p1,this.p2,line.p1) != this.collision(this.p1,this.p2,line.p2);
+    }
+
+    normalize(){
+        let substitution = new Point(this.p2.x - this.p1.x,this.p2.y - this.p1.y);
+        let magnitude = Math.sqrt(substitution.x**2 + substitution.y**2);
+        return new Point(substitution.x/magnitude,substitution.y/magnitude);
     }
 
     draw(){
